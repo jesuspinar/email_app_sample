@@ -109,10 +109,11 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.MailsViewHolde
 
         @Override
         public void onClick(View v) {
+            //todo: load detailled message
 //            if(listener != null) {
 //                listener.onClick(getAdapterPosition());
 //            }
-            Toast.makeText(v.getContext(), getClass().getSimpleName()+"no click implementation..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), getClass().getSimpleName()+" no click implementation..", Toast.LENGTH_SHORT).show();
         }
     }
 }
