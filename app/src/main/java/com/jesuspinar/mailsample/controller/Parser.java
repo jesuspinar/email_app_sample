@@ -40,61 +40,53 @@ public class Parser {
             JSONTokener tokener = new JSONTokener(json);
             JSONArray jsonArray = new JSONArray(tokener);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                switch (i) {
-                    case 0:
-                        JSONObject jsonUser = jsonArray.getJSONObject(i);
-                        user = new User(jsonUser.getString("name"), jsonUser.getString("firstSurname"),jsonUser.getString("email"));
-                        break;
 
-                    case 1: {
-                        JSONObject jsonContacs = jsonArray.getJSONObject(i);
-                        JSONArray contactsJsonArray = jsonContacs.getJSONArray("contacts");
-                        contacts = new Contact[contactsJsonArray.length()];
-                        for (int j = 0; j <  contactsJsonArray.length(); j++) {
-                            JSONObject contact = jsonArray.getJSONObject(j);
-                            String name = contact.getString("name");
-                            String firstSurname = contact.getString("firstSurname");
-                            String secondSurname = contact.getString("secondSurname");
-                            String photo = contact.getString("photo");
-                            String birth = contact.getString("birth");
-                            String email = contact.getString("email");
-                            String phone1 = contact.getString("phone1");
-                            String phone2 = contact.getString("phone2");
-                            String address = contact.getString("address");
-                            contacts[j] = new Contact(name, firstSurname, secondSurname, photo, birth, email, phone1, phone2, address);
-                        }
+            JSONObject jsonUserData = jsonArray.getJSONObject(0);
+            JSONArray jsonMailsData = jsonUserData.getJSONArray("mails");
+            JSONArray jsonContactsData = jsonUserData.getJSONArray("contacts");
+            jsonUserData = jsonUserData.getJSONObject("myAccount");
 
-                    } break;
+            // USER DATA
+            String userName = jsonUserData.getString("name");
+            String userFirstSurname = jsonUserData.getString("firstSurname");
+            String userEmail = jsonUserData.getString("email");
+            user = new User(userName, userFirstSurname, userEmail);
 
-                    case 2: {
-                        JSONObject jsonMails = jsonArray.getJSONObject(i);
-                        JSONArray mailsJsonArray = jsonMails.getJSONArray("mails");
-                        mails = new Mail[mailsJsonArray.length()];
-                        for (int j = 0; j <  mailsJsonArray.length(); j++) {
-                            JSONObject mail = jsonArray.getJSONObject(j);
+            // USER CONTACTS
+            contacts = new Contact[jsonContactsData.length()];
+            for (int j = 0; j < jsonContactsData.length(); j++) {
+                JSONObject contact = jsonContactsData.getJSONObject(j);
+                String name = contact.getString("name");
+                String firstSurname = contact.getString("firstSurname");
+                String secondSurname = contact.getString("secondSurname");
+                int photo = contact.getInt("foto");
+                String birth = contact.getString("birth");
+                String email = contact.getString("email");
+                String phone1 = contact.getString("phone1");
+                String phone2 = contact.getString("phone2");
+                String address = contact.getString("address");
+                contacts[j] = new Contact(name, firstSurname, secondSurname, String.valueOf(photo),
+                        birth, email, phone1, phone2, address);
+            }
+            // USER MAILS
+            mails = new Mail[jsonMailsData.length()];
+            for (int j = 0; j < jsonMailsData.length(); j++) {
+                JSONObject mail = jsonMailsData.getJSONObject(j);
 
-                            String from = mail.getString("from");
-                            String to = mail.getString("to");
-                            String subject = mail.getString("subject");
-                            String body = mail.getString("body");
-                            String sentOn = mail.getString("sentOn");
+                String from = mail.getString("from");
+                String to = mail.getString("to");
+                String subject = mail.getString("subject");
+                String body = mail.getString("body");
+                String sentOn = mail.getString("sentOn");
 
-                            boolean readed = mail.getBoolean("readed");
-                            boolean deleted = mail.getBoolean("deleted");
-                            boolean spam = mail.getBoolean("spam");
-                            mails[j] = new Mail(from, to, subject ,body, sentOn, readed,deleted, spam);
-                        }
-                    }
-                    break;
-                    default: throw new RuntimeException("Error while parsing, see "+ this.getClass());
-                }
-
-
+                boolean readed = mail.getBoolean("readed");
+                boolean deleted = mail.getBoolean("deleted");
+                boolean spam = mail.getBoolean("spam");
+                mails[j] = new Mail(from, to, subject, body, sentOn, readed, deleted, spam);
             }
             parsed = true;
         } catch (Exception e) {
-            Log.e("CountryParser", "Unknown Exception: " + e.getLocalizedMessage());
+            Log.e(getClass().getSimpleName(), "Unknown Exception: " + e.getLocalizedMessage());
         }
         return parsed;
     }
@@ -108,6 +100,6 @@ public class Parser {
     }
 
     public Mail[] getMails() {
-        return mails;
+        return this.mails;
     }
 }

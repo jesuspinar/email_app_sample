@@ -10,6 +10,8 @@ import com.jesuspinar.mailsample.fragments.Spam;
 import com.jesuspinar.mailsample.fragments.Trash;
 import com.jesuspinar.mailsample.fragments.Unread;
 import com.google.android.material.navigation.NavigationView;
+import com.jesuspinar.mailsample.model.Mail;
+
 import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -22,8 +24,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements IOnClickListener, Emailed.IOnAttachListener, NavigationView.OnNavigationItemSelectedListener
+{
     private DrawerLayout drawer;
+    private Mail[] mails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvUser.setText(R.string.nav_header_title);
         TextView tvEmail = headerView.findViewById(R.id.tvEmail);
         tvEmail.setText(R.string.nav_header_subtitle);
+        Parser p = new Parser(this);
+        if (p.parse()){
+            mails = p.getMails();
+        }
     }
 
     @Override
@@ -137,5 +145,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(int position) {
+        //TODO: next implementation load other fragment with full view
+    }
+
+    @Override
+    public Mail[] getMails() {
+        return mails;
     }
 }
