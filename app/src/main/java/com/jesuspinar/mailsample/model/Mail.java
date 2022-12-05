@@ -9,6 +9,8 @@ public class Mail {
     private final String subject;
     private final String body;
     private final String sentOn;
+    private final String date;
+    private final String time;
     private boolean readed;
     private boolean deleted;
     private boolean spam;
@@ -19,10 +21,12 @@ public class Mail {
         this.to = to;
         this.subject = subject;
         this.body = body;
-        this.sentOn = sentOn;
         this.readed = readed;
         this.deleted = deleted;
         this.spam = spam;
+        this.sentOn = sentOn;
+        date = sentOn.substring(0,sentOn.indexOf(" "));
+        time = sentOn.substring(sentOn.indexOf(" ")+1);
     }
 
     public int getId() {
@@ -59,6 +63,14 @@ public class Mail {
 
     public boolean isSpam() {
         return spam;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public void setReaded(boolean readed) {
