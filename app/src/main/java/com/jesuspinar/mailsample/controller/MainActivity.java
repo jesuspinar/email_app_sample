@@ -55,6 +55,12 @@ public class MainActivity extends AppCompatActivity implements IOnClickListener,
         if (p.parse()){
             mails = p.getMails();
         }
+        Fragment f = new Received();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_frame, f)
+                .commit();
+        setTitle(R.string.received);
     }
 
     @Override
@@ -140,7 +146,6 @@ public class MainActivity extends AppCompatActivity implements IOnClickListener,
                     .replace(R.id.content_frame, f)
                     .commit();
             setTitle(R.string.trash);
-
         }
 
         drawer.closeDrawer(GravityCompat.START);
