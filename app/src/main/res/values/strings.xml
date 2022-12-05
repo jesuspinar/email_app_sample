@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Mail Sample</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_other">Other options</string>
+
+    <string name="nav_header_title">Unknown</string>
+    <string name="nav_header_subtitle">user@unknown.mail</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="received">Received</string>
+    <string name="emailed">E-mailed</string>
+    <string name="unread">Unread</string>
+    <string name="newmail">Send</string>
+
+    <string name="spam">Spam</string>
+    <string name="trash">Trash</string>
+</resources>

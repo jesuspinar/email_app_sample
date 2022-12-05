@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_received"
+            android:icon="@drawable/ic_menu_received"
+            android:title="@string/received"/>
+        <item
+            android:id="@+id/nav_emailed"
+            android:icon="@drawable/ic_menu_emailed"
+            android:title="@string/emailed"/>
+        <item
+            android:id="@+id/nav_unread"
+            android:icon="@drawable/ic_menu_star"
+            android:title="@string/unread"/>
+        <item
+            android:id="@+id/nav_newmail"
+            android:icon="@drawable/ic_menu_newmail"
+            android:title="@string/newmail"/>
+    </group>
+
+    <item android:title="@string/navigation_drawer_other">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_spam"
+                    android:icon="@drawable/ic_menu_spam"
+                    android:title="@string/spam"/>
+                <item
+                    android:id="@+id/nav_trash"
+                    android:icon="@drawable/ic_menu_trash"
+                    android:title="@string/trash"/>
+            </group>
+        </menu>
+    </item>
+</menu>
