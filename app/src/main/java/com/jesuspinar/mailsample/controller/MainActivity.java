@@ -1,7 +1,8 @@
-package com.jesuspinar.mailsample;
+package com.jesuspinar.mailsample.controller;
 
 import android.os.Bundle;
 
+import com.jesuspinar.mailsample.R;
 import com.jesuspinar.mailsample.fragments.Newmail;
 import com.jesuspinar.mailsample.fragments.Received;
 import com.jesuspinar.mailsample.fragments.Emailed;
